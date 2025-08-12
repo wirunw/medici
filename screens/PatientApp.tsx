@@ -1,6 +1,4 @@
-
-import React, 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MOCK_PRACTITIONERS, ORDER_STATUS_DETAILS, MOCK_ALL_CENTRAL_PRODUCTS } from '../constants';
 import { ConsultationType, DeliveryMethod, OrderStatus, UserRole, PractitionerRole, PractitionerType, FulfillmentSource } from '../types';
 import type { Patient, Practitioner, Consultation, PreliminaryInfo, Order, OrderItem, MessengerInfo } from '../types';
@@ -188,39 +186,39 @@ const OrderSummaryScreen = ({ order, onNavigate }: { order: Order, onNavigate: (
 
     return (
      <Card>
-         <div className="text-center mb-6">
-              <div className="text-green-500 text-5xl mb-3">🧾</div>
-              <h2 className="text-2xl font-bold text-gray-800">ส่งใบสั่งยา/คำแนะนำให้คุณแล้ว</h2>
-              <p className="text-gray-500">กรุณาตรวจสอบและดำเนินการชำระเงิน</p>
-         </div>
-         <div className="border rounded-lg p-4 my-4">
+        <div className="text-center mb-6">
+               <div className="text-green-500 text-5xl mb-3">🧾</div>
+               <h2 className="text-2xl font-bold text-gray-800">ส่งใบสั่งยา/คำแนะนำให้คุณแล้ว</h2>
+               <p className="text-gray-500">กรุณาตรวจสอบและดำเนินการชำระเงิน</p>
+        </div>
+        <div className="border rounded-lg p-4 my-4">
              <h3 className="text-lg font-bold mb-3">รายการผลิตภัณฑ์</h3>
              <div className="space-y-2 mb-4 text-gray-700">
-                {order.items.map(item => (
-                    <div key={item.product.id} className="flex justify-between">
-                        <span>{item.product.name} x {item.quantity}</span>
-                        <span>{(item.product.price * item.quantity).toLocaleString()} บาท</span>
-                    </div>
-                ))}
-                {order.consultationFee > 0 && (
-                    <div className="flex justify-between mt-2">
-                        <span>ค่าบริการให้คำปรึกษา</span>
-                        <span>{order.consultationFee.toLocaleString()} บาท</span>
-                    </div>
-                )}
-                {order.totalDiscount > 0 && (
-                     <div className="flex justify-between text-green-600">
-                        <span>ส่วนลดจากผู้ให้คำปรึกษา</span>
-                        <span>- {order.totalDiscount.toLocaleString()} บาท</span>
-                    </div>
-                )}
+                 {order.items.map(item => (
+                     <div key={item.product.id} className="flex justify-between">
+                         <span>{item.product.name} x {item.quantity}</span>
+                         <span>{(item.product.price * item.quantity).toLocaleString()} บาท</span>
+                     </div>
+                 ))}
+                 {order.consultationFee > 0 && (
+                     <div className="flex justify-between mt-2">
+                         <span>ค่าบริการให้คำปรึกษา</span>
+                         <span>{order.consultationFee.toLocaleString()} บาท</span>
+                     </div>
+                 )}
+                 {order.totalDiscount > 0 && (
+                      <div className="flex justify-between text-green-600">
+                         <span>ส่วนลดจากผู้ให้คำปรึกษา</span>
+                         <span>- {order.totalDiscount.toLocaleString()} บาท</span>
+                     </div>
+                 )}
              </div>
              <div className="border-t pt-3 flex justify-between font-bold text-xl">
-                <span>รวมทั้งหมด:</span>
-                <span>{order.totalCost.toLocaleString()} บาท</span>
-            </div>
-         </div>
-         {order.soapNote && (
+                 <span>รวมทั้งหมด:</span>
+                 <span>{order.totalCost.toLocaleString()} บาท</span>
+           </div>
+        </div>
+        {order.soapNote && (
             <>
                 <h3 className="text-lg font-bold mb-2">คำแนะนำจากผู้เชี่ยวชาญ</h3>
                 <div className="text-gray-600 bg-gray-50 p-4 rounded-lg mb-6 whitespace-pre-wrap min-h-[100px] flex items-center justify-center">
@@ -231,8 +229,8 @@ const OrderSummaryScreen = ({ order, onNavigate }: { order: Order, onNavigate: (
                     )}
                 </div>
             </>
-         )}
-         <Button onClick={() => onNavigate('checkout', { order })} variant="primary">ดำเนินการต่อเพื่อชำระเงิน</Button>
+        )}
+        <Button onClick={() => onNavigate('checkout', { order })} variant="primary">ดำเนินการต่อเพื่อชำระเงิน</Button>
      </Card>
     );
 };
@@ -328,11 +326,11 @@ const FacilityDeliveryScreen = ({ order, patient, onConfirm, onBack }: { order: 
                     
                     <div className="border-t pt-6">
                         <h3 className="text-lg font-bold mb-2">ชำระค่าจัดส่ง</h3>
-                         <div className="flex flex-col items-center bg-gray-50 p-4 rounded-lg">
-                            <p className="text-gray-600">สแกน QR Code เพื่อชำระค่าจัดส่ง</p>
-                            <img src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=SHIPPING_PAYMENT_FOR_${order.id}`} alt="QR Code for shipping" className="my-3 rounded-lg shadow" />
-                            <div className="font-bold text-xl">ยอดชำระ: {shippingDetails.cost} บาท</div>
-                        </div>
+                          <div className="flex flex-col items-center bg-gray-50 p-4 rounded-lg">
+                             <p className="text-gray-600">สแกน QR Code เพื่อชำระค่าจัดส่ง</p>
+                             <img src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=SHIPPING_PAYMENT_FOR_${order.id}`} alt="QR Code for shipping" className="my-3 rounded-lg shadow" />
+                             <div className="font-bold text-xl">ยอดชำระ: {shippingDetails.cost} บาท</div>
+                         </div>
                     </div>
                     <Button type="submit" variant="secondary">ยืนยันและเริ่มติดตามสถานะ</Button>
                 </form>
@@ -406,8 +404,8 @@ const TrackingScreen = ({ order, onBack, onNavigate, updateOrder }: { order: Ord
         if (order.status === OrderStatus.COMPLETED || order.status === OrderStatus.DELIVERED) {
              const timer = setTimeout(() => {
                  onNavigate('orderDelivered', { order });
-            }, 3000);
-           return () => clearTimeout(timer);
+             }, 3000);
+            return () => clearTimeout(timer);
         }
 
         const nextStatusMap: Partial<Record<OrderStatus, OrderStatus>> = {
@@ -436,24 +434,24 @@ const TrackingScreen = ({ order, onBack, onNavigate, updateOrder }: { order: Ord
                 <p className="text-center text-gray-500 mb-8">ผู้ให้คำปรึกษา: {order.practitioner.name}</p>
                 
                  <div className="flex justify-between items-start my-8 px-4">
-                    {stepDetails.map((stepInfo, index) => (
-                        <div key={index} className="step flex flex-col items-center relative flex-grow text-center">
-                            {index > 0 && 
-                                <div className={`absolute top-5 right-1/2 w-full h-1 ${index < currentStep ? 'bg-green-500' : 'bg-gray-200'}`} />
-                            }
-                            <div className={`step-circle w-10 h-10 rounded-full flex items-center justify-center border-4 z-10 font-bold transition-all duration-300 ${
-                                index + 1 < currentStep ? 'bg-green-500 text-white border-white' : 
-                                index + 1 === currentStep ? 'bg-green-100 text-green-700 border-green-200 animate-pulse' : 
-                                'bg-gray-200 text-gray-500 border-gray-50'
-                            }`}>
-                                {index + 1 < currentStep ? <CheckCircleIcon className="w-6 h-6"/> : index + 1}
-                            </div>
-                            <p className={`step-text mt-2 font-semibold text-sm w-24 ${index + 1 <= currentStep ? 'text-green-600' : 'text-gray-500'}`}>
-                                {isPickup ? (stepInfo.pickupText || stepInfo.text) : (stepInfo.deliveryText || stepInfo.text)}
-                            </p>
-                        </div>
-                    ))}
-                </div>
+                     {stepDetails.map((stepInfo, index) => (
+                         <div key={index} className="step flex flex-col items-center relative flex-grow text-center">
+                             {index > 0 && 
+                                 <div className={`absolute top-5 right-1/2 w-full h-1 ${index < currentStep ? 'bg-green-500' : 'bg-gray-200'}`} />
+                             }
+                             <div className={`step-circle w-10 h-10 rounded-full flex items-center justify-center border-4 z-10 font-bold transition-all duration-300 ${
+                                 index + 1 < currentStep ? 'bg-green-500 text-white border-white' : 
+                                 index + 1 === currentStep ? 'bg-green-100 text-green-700 border-green-200 animate-pulse' : 
+                                 'bg-gray-200 text-gray-500 border-gray-50'
+                             }`}>
+                                 {index + 1 < currentStep ? <CheckCircleIcon className="w-6 h-6"/> : index + 1}
+                             </div>
+                             <p className={`step-text mt-2 font-semibold text-sm w-24 ${index + 1 <= currentStep ? 'text-green-600' : 'text-gray-500'}`}>
+                                 {isPickup ? (stepInfo.pickupText || stepInfo.text) : (stepInfo.deliveryText || stepInfo.text)}
+                             </p>
+                         </div>
+                     ))}
+                 </div>
 
                 <Button onClick={onBack} variant="primary" className="mt-8">กลับสู่หน้าหลัก</Button>
             </Card>
@@ -614,7 +612,7 @@ export const PatientApp = ({
                     <div className="text-3xl text-yellow-600 w-12 text-center mx-auto mb-4"><SpinnerIcon className="w-12 h-12"/></div>
                     <h2 className="text-xl font-bold text-yellow-800 mb-2">รอรับคำแนะนำ</h2>
                     <p className="text-sm text-gray-600">{waitingForPrescriptionFrom.practitioner.name} กำลังเตรียมข้อมูลให้คุณ...</p>
-                </Card>
+                 </Card>
             )
         }
         
