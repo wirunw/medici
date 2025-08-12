@@ -1,7 +1,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { PreliminaryInfo, Product, Practitioner } from '../types';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// --- นี่คือบรรทัดที่ถูกแก้ไข ---
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
 
 const responseSchema = {
   type: Type.OBJECT,
