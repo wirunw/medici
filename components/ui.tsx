@@ -34,38 +34,43 @@ export const Button = ({ children, onClick, className = '', variant = 'primary',
   return <button type={type} onClick={onClick} className={`${baseClasses} ${variantClasses[variant]} ${className}`} disabled={disabled}>{children}</button>;
 };
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+// --- FIXED ---
+// เปลี่ยนจากการใช้ `extends` มาเป็น Intersection Type (`&`) เพื่อแก้ปัญหา Type Inference
+type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
-}
-export const Input = ({ id, label, className, ...props }: InputProps) => (
+};
+export const Input = ({ label, ...props }: InputProps) => (
   <div>
-    <label htmlFor={id} className="block font-medium text-gray-700 mb-1">{label}</label>
-    <input id={id} {...props} className={`w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${className || ''}`} />
+    <label htmlFor={props.id} className="block font-medium text-gray-700 mb-1">{label}</label>
+    <input {...props} className={`w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${props.className || ''}`} />
   </div>
 );
 
-interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+// --- FIXED ---
+// ใช้วิธีเดียวกับ Input
+type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
   label: string;
-}
-export const Textarea = ({ id, label, className, ...props }: TextareaProps) => (
+};
+export const Textarea = ({ label, ...props }: TextareaProps) => (
     <div>
-        <label htmlFor={id} className="block font-medium text-gray-700 mb-1">{label}</label>
-        <textarea id={id} {...props} className={`w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${className || ''}`} />
+        <label htmlFor={props.id} className="block font-medium text-gray-700 mb-1">{label}</label>
+        <textarea {...props} className={`w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${props.className || ''}`} />
     </div>
 );
 
-interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+// --- FIXED ---
+// ใช้วิธีเดียวกับ Input
+type SelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
   label: string;
   children: ReactNode;
-}
-export const Select = ({ id, label, children, ...props }: SelectProps) => (
+};
+export const Select = ({ label, children, ...props }: SelectProps) => (
     <div>
-        <label htmlFor={id} className="block font-medium text-gray-700 mb-1">{label}</label>
+        <label htmlFor={props.id} className="block font-medium text-gray-700 mb-1">{label}</label>
         <div className="relative">
             <select
-                id={id}
                 {...props}
-                className="w-full border border-gray-300 rounded-lg p-3 pr-10 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white text-gray-900"
+                className={`w-full border border-gray-300 rounded-lg p-3 pr-10 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white text-gray-900 ${props.className || ''}`}
             >
                 {children}
             </select>
